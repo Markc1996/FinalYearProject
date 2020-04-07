@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="52799f3d-1461-46a6-b22e-6f928cfb9b11" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1Zz0Qv6EuRlP3HKB0nGDalKkH48" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.16.1" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52799f3d-1461-46a6-b22e-6f928cfb9b11" name="Default Changelist" comment="" />
+      <created>1585826602735</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585826602735</updated>
+      <workItem from="1585826604540" duration="7645000" />
+      <workItem from="1586183109271" duration="18066000" />
+      <workItem from="1586266586810" duration="12473000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586183567434">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1586183567434" />
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585837891364">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1585837891364" />
+    <state width="618" height="127" key="GridCell.Tab.0.bottom" timestamp="1586275341366">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="618" height="127" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1586275341366" />
+    <state width="618" height="127" key="GridCell.Tab.0.center" timestamp="1586275341366">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="618" height="127" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1586275341366" />
+    <state width="618" height="127" key="GridCell.Tab.0.left" timestamp="1586275341365">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="618" height="127" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1586275341365" />
+    <state width="618" height="127" key="GridCell.Tab.0.right" timestamp="1586275341366">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="618" height="127" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1586275341366" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1585839395854">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1585839395854" />
+  </component>
+</project>
