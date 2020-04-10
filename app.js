@@ -12,9 +12,20 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
+
+
+
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/FYP');
-var db = mongoose.connection;
+//var db = mongoose.connection;
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Mark:<markc96>@cluster0-hxi5w.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("FYP").collection("users");
+  // perform actions on the collection object
+  client.close();
+});
 
 
 
@@ -51,7 +62,8 @@ app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true
-}));
+})
+);
 
 //Express Validator
 /*app.use(expressValidator({
@@ -103,9 +115,9 @@ app.use('/register',registerRouter);
 app.use('/raspberry',raspberryRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+//app.use(function(req, res, next) {
+//  next(createError(404));
+//});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -118,9 +130,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//config passport
+require('./config/passport')(passport);
+
+// DB Config
+const db = require('./config/keys').mongoURI;
+
+// Connect to MongoDB
+mongoose
+    .connect(
+        db,
+        { useNewUrlParser: true }
+    )
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
+
+
 
 module.exports = app;
 
-
-const monoose  = require('mongoose');
 
