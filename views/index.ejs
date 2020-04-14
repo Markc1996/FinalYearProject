@@ -26,6 +26,17 @@
         max-height: 225px;
       }
 
+      #map {
+        height: 300px;
+        width: 50%;
+      }
+
+      #player {
+        text-align: right;
+        position: relative;
+
+      }
+
     </style>
 
   </head>
@@ -59,9 +70,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="register">Registration</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout">Logout</a>
         </li>
 
       </ul>
@@ -198,20 +206,20 @@
             <div class="col-md-2 mx-auto">
 
               <!-- Links -->
-              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+              <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Other</h5>
 
               <ul class="list-unstyled">
                 <li>
-                  <a href="#!">Link 1</a>
+                  <a href="https://pcpartpicker.com/" target="_blank">PC Part Picker</a>
                 </li>
                 <li>
-                  <a href="#!">Link 2</a>
+                  <a href="https://www.pcspecialist.ie/build-your-own-pc/" target="_blank">PC Specialist</a>
                 </li>
                 <li>
-                  <a href="#!">Link 3</a>
+                  <a href="https://www.amazon.co.uk/" target="_blank">Amazon UK</a>
                 </li>
                 <li>
-                  <a href="#!">Link 4</a>
+                  <a href="https://www.amazon.de/" target="_blank">Amazon Germany</a>
                 </li>
               </ul>
 
@@ -257,6 +265,32 @@
 
         <hr>
 
+        <!--Google Maps API-->
+
+        <div id="map"></div>
+        <script>
+          // Initialize and add the map
+          function initMap() {
+            // The location of WIT, Ireland
+            var WIT = {lat: 52.245398, lng: -7.138765};
+            // The map, centered at WIT
+            var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 16, center: WIT});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: WIT, map: map});
+          }
+        </script>
+        <!--Load the API from the specified URL
+        * The async attribute allows the browser to render the page while the API loads
+        * The key parameter will contain your own API key (which is not needed for this tutorial)
+        * The callback parameter executes the initMap() function
+        -->
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALWXdcwqsiVGQ54m-vZ91g72vpw8dpVVc&callback=initMap">
+        </script>
+
+
+
         <!-- Call to action -->
         <ul class="list-unstyled list-inline text-center py-2">
           <li class="list-inline-item">
@@ -270,11 +304,7 @@
 
         <hr>
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-          <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
+
 
       </footer>
       <!-- Footer -->

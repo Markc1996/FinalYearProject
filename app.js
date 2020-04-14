@@ -12,21 +12,39 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
+var jwt = require('jsonwebtoken');
 
-
+//Init App
+var app = express();
 
 var mongoose = require('mongoose');
+
+
+mongoose.connect ('mongodb+srv://Mark:markc96@cluster0-hxi5w.mongodb.net/FYP?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect('mongodb://localhost:27017/FYP');
+
 //var db = mongoose.connection;
 
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
+
+/*
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://Mark:<markc96>@cluster0-hxi5w.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useNewUrlParser: false });
 client.connect(err => {
-  const collection = client.db("FYP").collection("users");
+  const collection = client.db("FYP").collection("User");
   // perform actions on the collection object
   client.close();
 });
-
+*/
 
 
 var indexRouter = require('./routes/index');
@@ -37,13 +55,23 @@ var completedbuilds = require('./routes/completedbuilds');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var raspberryRouter = require('./routes/raspberry');
+var profileRouter = require('./routes/profile');
+var forgotRouter = require('./routes/forgot1');
 
-//Init App
-var app = express();
+//completed builds other pages
+var cb1Router = require('./routes/cb/cb1');
+var cb2Router = require('./routes/cb/cb2');
+var cb3Router = require('./routes/cb/cb3');
+
+var engine = require('ejs-mate');
+
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 // BodyParsher Middleware
@@ -52,7 +80,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Static Folder (images etc)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -113,11 +141,14 @@ app.use('/completedbuilds',completedbuilds);
 app.use('/login',loginRouter);
 app.use('/register',registerRouter);
 app.use('/raspberry',raspberryRouter);
+app.use('/profile', profileRouter);
+app.use('/forgot1', forgotRouter);
 
-// catch 404 and forward to error handler
-//app.use(function(req, res, next) {
-//  next(createError(404));
-//});
+//completed builds app use
+app.use('/cb1', cb1Router);
+app.use('/cb2', cb2Router);
+app.use('/cb3', cb3Router);
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -136,17 +167,6 @@ require('./config/passport')(passport);
 // DB Config
 const db = require('./config/keys').mongoURI;
 
-// Connect to MongoDB
-mongoose
-    .connect(
-        db,
-        { useNewUrlParser: true }
-    )
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
-
 
 
 module.exports = app;
-
-
