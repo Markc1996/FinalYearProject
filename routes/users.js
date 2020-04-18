@@ -6,6 +6,7 @@ const passport = require('passport');
 // Load User model
 const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
+
 var async = require('async');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
@@ -14,6 +15,7 @@ var axios = require('axios');
 const flatted = require('flatted');
 var request = require('request');
 var LocalStrategy = require('passport-local').Strategy;
+
 
 mongoose.connect  ('mongodb+srv://Mark:markc96@cluster0-hxi5w.mongodb.net/FYP?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 //mongoose.connect('mongodb://localhost:27017/FYP');
@@ -110,12 +112,18 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+  res.redirect('/login');
 });
 
-// Password reset
+// Forgot
 
-router.post('/forgot1', function(req, res, next) {
+router.get('/users', function(req, res) {
+  res.render('forgot1', {
+    user: req.user
+  });
+});
+
+router.post('/users', function(req, res, next) {
   async.waterfall([
     function(done) {
       crypto.randomBytes(20, function(err, buf) {
@@ -254,5 +262,7 @@ router.post('/reset/:token', function(req, res) {
     res.redirect('/');
   });
 });
+
+
 
 module.exports = router;

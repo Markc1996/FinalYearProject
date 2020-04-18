@@ -39,7 +39,12 @@
     "xoauth2": "^1.2.0",
     "jquery": "^3.5.0",
     "esm": "^3.2.25",
-    "ejs-mate": "^3.0.0"
+    "ejs-mate": "^3.0.0",
+    "unirest": "^0.6.0",
+    "req": "^0.1.4",
+    "util": "^0.12.2",
+    "multer-gridfs-storage": "^4.0.3",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
     "@types/mongodb": "^3.5.4"
