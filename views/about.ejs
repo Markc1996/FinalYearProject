@@ -150,15 +150,15 @@
 
 
         #map {
-            height: 400px;  /* The height is 400 pixels */
-            width: 100%;  /* The width is the width of the web page */
+            height: 300px;
+            width: 50%;
         }
 
 
     </style>
 
 </head>
-<body>
+<body style="background-color:#f8fccc;">
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">PCBuildIreland</a>
@@ -188,6 +188,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="register">Registration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact">Contact Us</a>
             </li>
 
         </ul>
@@ -260,10 +263,10 @@
         // Initialize and add the map
         function initMap() {
             // The location of Uluru
-            var uluru = {lat: -25.344, lng: 131.036};
+            var uluru = {lat: 52.245398, lng: -7.138765};
             // The map, centered at Uluru
             var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 4, center: uluru});
+                document.getElementById('map'), {zoom: 16, center: uluru});
             // The marker, positioned at Uluru
             var marker = new google.maps.Marker({position: uluru, map: map});
         }

@@ -30,6 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.16.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -69,6 +70,19 @@
       <workItem from="1587227259670" duration="2332000" />
       <workItem from="1587245008648" duration="220000" />
       <workItem from="1587245744715" duration="336000" />
+      <workItem from="1587247204092" duration="584000" />
+      <workItem from="1587247854611" duration="2718000" />
+      <workItem from="1587329458130" duration="3928000" />
+      <workItem from="1587388841617" duration="4120000" />
+      <workItem from="1587403534609" duration="6435000" />
+      <workItem from="1587411985790" duration="1293000" />
+      <workItem from="1587414345322" duration="2931000" />
+      <workItem from="1587497057061" duration="4119000" />
+      <workItem from="1587734834915" duration="1805000" />
+      <workItem from="1587911828104" duration="3620000" />
+      <workItem from="1587917481147" duration="947000" />
+      <workItem from="1588067896829" duration="5868000" />
+      <workItem from="1588090635904" duration="3223000" />
     </task>
     <servers />
   </component>
@@ -84,10 +98,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1587225672053" />
-    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587244625034">
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587498828214">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587244625034" />
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587498828214" />
     <state x="375" y="88" key="EnvironmentVariablesDialog" timestamp="1587052945253">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -96,22 +110,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587053198773" />
-    <state width="810" height="125" key="GridCell.Tab.0.bottom" timestamp="1587246084547">
+    <state width="1237" height="125" key="GridCell.Tab.0.bottom" timestamp="1588093862651">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="810" height="125" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587246084547" />
-    <state width="810" height="125" key="GridCell.Tab.0.center" timestamp="1587246084547">
+    <state width="1237" height="125" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588093862651" />
+    <state width="1237" height="125" key="GridCell.Tab.0.center" timestamp="1588093862651">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="810" height="125" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587246084547" />
-    <state width="810" height="125" key="GridCell.Tab.0.left" timestamp="1587246084546">
+    <state width="1237" height="125" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588093862651" />
+    <state width="1237" height="125" key="GridCell.Tab.0.left" timestamp="1588093862650">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="810" height="125" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587246084546" />
-    <state width="810" height="125" key="GridCell.Tab.0.right" timestamp="1587246084547">
+    <state width="1237" height="125" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588093862650" />
+    <state width="1237" height="125" key="GridCell.Tab.0.right" timestamp="1588093862651">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="810" height="125" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587246084547" />
+    <state width="1237" height="125" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588093862651" />
     <state width="809" height="162" key="GridCell.Tab.1.bottom" timestamp="1587225458561">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -168,5 +182,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587225829957" />
+    <state x="627" y="329" key="com.intellij.ide.util.TipDialog" timestamp="1587913087349">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="627" y="329" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1587913087349" />
   </component>
 </project>

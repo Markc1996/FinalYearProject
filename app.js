@@ -14,8 +14,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var jwt = require('jsonwebtoken');
-
+const multer = require('multer');
+const Grid = require('gridfs-stream');
 const GridFsStorage = require("multer-gridfs-storage");
+const methodOverride = require('method-override');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const fetch = require('node-fetch');
+const { stringify } = require('querystring');
 
 //Init App
 var app = express();
@@ -60,6 +66,7 @@ var registerRouter = require('./routes/register');
 var raspberryRouter = require('./routes/raspberry');
 var profileRouter = require('./routes/profile');
 var forgotRouter = require('./routes/forgot1');
+
 //var articleRouter = require('./routes/articles');
 
 
@@ -123,6 +130,202 @@ app.use(session({
 }));
 */
 
+
+// UPLOAD
+
+// Create mongo connection
+const conn = mongoose.createConnection('mongodb+srv://Mark:markc96@cluster0-hxi5w.mongodb.net/FYP?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+// Init gfs
+let gfs;
+
+conn.once('open', () => {
+  // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+
+// Create storage engine
+const storage = new GridFsStorage({
+  url: 'mongodb+srv://Mark:markc96@cluster0-hxi5w.mongodb.net/FYP?retryWrites=true&w=majority',
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({ storage });
+
+// @route GET /
+// @desc Loads form
+app.get('/profile', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      res.render('profile', { files: false });
+    } else {
+      files.map(file => {
+        if (
+            file.contentType === 'image/jpeg' ||
+            file.contentType === 'image/png'  ||
+            file.contentType === 'image/pdf'  ||
+            file.contentType === 'image/tiff'
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      res.render('profile', { files: files });
+    }
+  });
+});
+
+// @route POST /upload
+// @desc  Uploads file to DB
+app.post('/upload', upload.single('file'), (req, res) => {
+  // res.json({ file: req.file });
+  res.redirect('/');
+});
+
+// @route GET /files
+// @desc  Display all files in JSON
+app.get('/files', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      });
+    }
+
+    // Files exist
+    return res.json(files);
+  });
+});
+
+// @route GET /files/:filename
+// @desc  Display single file object
+app.get('/files/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+    // File exists
+    return res.json(file);
+  });
+});
+
+// @route GET /image/:filename
+// @desc Display Image
+app.get('/image/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+
+    // Check if image
+    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+      // Read output to browser
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an image'
+      });
+    }
+  });
+});
+
+// @route DELETE /files/:id
+// @desc  Delete file
+app.delete('/files/:id', (req, res) => {
+  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+
+    res.redirect('/');
+  });
+});
+
+
+//Mail
+
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+
+app.post('/send', (req, res) => {
+  const output = `
+    <p>You have a new contact request</p>
+    <h3>Contact Details</h3>
+    <ul>  
+      <li>Name: ${req.body.name}</li>
+      <li>Company: ${req.body.company}</li>
+      <li>Email: ${req.body.email}</li>
+      <li>Phone: ${req.body.phone}</li>
+    </ul>
+    <h3>Message</h3>
+    <p>${req.body.message}</p>
+  `;
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: 'imap.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: 'markuscarley@gmail.com', // generated ethereal user
+      pass: 'rebecca19961996'  // generated ethereal password
+    },
+    tls:{
+      rejectUnauthorized:false
+    }
+  });
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+    from: '"Node Mail Contact" <markcarley885@gmail.com>', // sender address
+    to: 'markuscarley@gmail.com', // list of receivers
+    subject: 'Node Contact Request', // Subject line
+    text: 'Hello world?', // plain text body
+    html: output // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    res.render('contact', {msg:'Email has been sent'});
+  });
+});
+
+
+
+
+
 // Connect Flash
 app.use(flash());
 
@@ -178,6 +381,37 @@ require('./config/passport')(passport);
 
 // DB Config
 const db = require('./config/keys').mongoURI;
+
+
+//Capta
+
+app.post('/subscribe', async (req, res) => {
+  if (!req.body.captcha)
+    return res.json({ success: false, msg: 'Please select captcha' });
+
+  // Secret key
+  const secretKey = '6LcZmu8UAAAAAHSbByPGkXeJ6SwYLjjdjHSqDUj2';
+
+  // Verify URL
+  const query = stringify({
+    secret: secretKey,
+    response: req.body.captcha,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+  // Make a request to verifyURL
+  const body = await fetch(verifyURL).then(res => res.json());
+
+  // If not successful
+  if (body.success !== undefined && !body.success)
+    return res.json({ success: false, msg: 'Failed captcha verification' });
+
+  // If successful
+  return res.json({ success: true, msg: 'Captcha passed' });
+});
+
+
 
 app.listen(port);
 module.exports = app;

@@ -4,7 +4,11 @@
 
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
+
+<body style="background-color:#f8fccc;">
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/">PCBuildIreland</a>
@@ -34,6 +38,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="register">Registration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact">Contact Us</a>
             </li>
 
 
@@ -98,6 +105,14 @@
                             value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
                     />
                 </div>
+
+                <div
+                        class="g-recaptcha"
+                        data-sitekey="6LcZmu8UAAAAALIkK1ki6mzuCiaPS8o3IrmyMM7-
+"
+                ></div>
+                <br>
+
                 <button type="submit" class="btn btn-primary btn-block">
                     Register
                 </button>
@@ -229,6 +244,28 @@
 </footer>
 
 <hr>
+
+<script>
+    document.getElementById('subscribeForm').addEventListener('submit', e => {
+        e.preventDefault();
+
+        const name = document.querySelector('#name').value;
+        const email = document.querySelector('#email').value;
+        const captcha = document.querySelector('#g-recaptcha-response').value;
+
+        return fetch('/subscribe', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ name, email, captcha })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                alert(data.msg);
+                if (data.success) return location.reload();
+            });
+    });
+</script>
 
 </body>
 </html>
